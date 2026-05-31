@@ -1,4 +1,6 @@
 const shapes = [
+    -3.5,
+    -3,
     -2,
     2,
     0,
@@ -15,6 +17,8 @@ const shapes = [
     16
 ]
 const shapeNames = [
+    "star3Offset",
+    "star3",
     "football",
     "line",
     "circle",

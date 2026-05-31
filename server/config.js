@@ -88,7 +88,7 @@ module.exports = {
     },
 
     // The class that players and bots spawn as.
-    spawn_class: "tank",
+    spawn_class: ["shell", "unarmed"],
 
     // How every entity regenerates their health.
     regenerate_tick: 100,

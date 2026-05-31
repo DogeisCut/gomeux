@@ -127,13 +127,13 @@ function init() {
             }
         },
         {
-            name: "Tank",
+            name: "Base Class",
             keys: [[[81, "Q"]]],
             level: 1,
             operatorAccess: true,
             run: ({ player }) => {
                 player.body.define({ RESET_UPGRADES: true, BATCH_UPGRADES: false });
-                player.body.define("tank");
+                player.body.define(["shell", "unarmed"]);
             }
         },
         {

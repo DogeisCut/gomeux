@@ -357,7 +357,7 @@ global.defineSplit = (() => {
                 my.branchLabel = ensureIsClass(set.PARENT).BRANCH_LABEL;
             }
         }
-        if (set.LABEL != null && set.LABEL.length > 0) my.label = my.label + "-" + set.LABEL;
+        if (set.LABEL != null && set.LABEL.length > 0) my.label = my.label + " / " + set.LABEL;
         if (set.MAX_CHILDREN != null) my.maxChildren += set.MAX_CHILDREN;
         else my.maxChildren = null; // For bullet and drone combos so all parts remain functional
         if (set.BODY != null) {
