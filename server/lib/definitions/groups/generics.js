@@ -437,10 +437,10 @@ Class.drone = {
 };
 
 Class.swarm = {
-    LABEL: "Swarm Drone",
+    LABEL: "Swarmer",
     TYPE: "swarm",
     ACCEPTS_SCORE: false,
-    SHAPE: 3,
+    SHAPE: 5,
     MOTION_TYPE: "swarm",
     FACING_TYPE: "smoothWithMotion",
     CONTROLLERS: ["nearestDifferentMaster", "mapTargetToGoal"],

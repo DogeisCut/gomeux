@@ -28,6 +28,10 @@
             - Director
             - [ ] Whelmer
                 - Cruiser
+                - [ ] Overwhelmer
+                    - Carrier
+                    - [ ] OverOverhelmer
+                        - banshee i thinkl
         - [ ] Roller
             - Smasher
             - [ ] Scraper
@@ -66,6 +70,7 @@
         - not sure about the duogons and monogons, at least having them be so beefy
     - [ ] Change polygon spawning mecahnics for a more even spread and rarer polygons towards the center.
     - [ ] Dynamic polygons (defs made at runtime when needed)
+    - [ ] Make polygons not spawn on people...
     - [ ] Radiance
         - [ ] Client rendering
         - [ ] Server
@@ -81,7 +86,7 @@
     - [X] Colors
     - [X] Font
     - [X] Player Names/Score
-    - [ ] Swarm drones are pentagonal. (and just refered to as swarmers)
+    - [X] Swarm drones are pentagonal. (and just refered to as swarmers)
     - [ ] Tank Tree
     - [ ] Death Screen
     - [ ] Disconnect Screen

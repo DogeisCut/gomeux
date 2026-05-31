@@ -36,8 +36,11 @@ exports.gunGenerators = {
                 PROPERTIES: {
                     MAX_CHILDREN: 4,
                     AUTOFIRE: true,
+                    SYNCS_SKILLS: true,
                     SHOOT_SETTINGS: combineStats([g.drone, ...extraStats]),
                     TYPE: "drone",
+                    STAT_CALCULATOR: "drone",
+                    WAIT_TO_CYCLE: true
                 }
             }
         ]
@@ -68,8 +71,29 @@ exports.gunGenerators = {
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.trap, ...extraStats]),
                     TYPE: "trap",
+                    STAT_CALCULATOR: "trap",
                 }
             },
+        ]
+    },
+    swarmerHatcher: ({ length = 13, width = 8, swarmTier = 0, angle = 0, x = 0, y = 0, delay = 0 } = {}, extraStats = []) => {
+        return [
+            {
+                POSITION: {
+                    LENGTH: length,
+                    WIDTH: width,
+                    ASPECT: 0.6,
+                    X: x,
+                    Y: y,
+                    ANGLE: angle,
+                    DELAY: delay
+                },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.swarm, ...extraStats]),
+                    TYPE: "swarm",
+                    STAT_CALCULATOR: "swarm",
+                }
+            }
         ]
     },
 }

@@ -22,6 +22,7 @@ tier0: {
     }
     Class.commander = {
         PARENT: "genericTank",
+        STAT_NAMES: statnames.drone,
         LABEL: "Commander",
         DANGER: 5,
         GUNS: [
@@ -45,6 +46,15 @@ tier1: {
         DANGER: 4,
         GUNS: [
             ...weaponMirror(gunGenerators.bulletCannon({ length: 18, width: 8, y: -5}), 0.5)
+        ],
+    }
+
+    Class.whelmer = {
+        PARENT: "genericTier1Tank",
+        LABEL: "Whelmer",
+        DANGER: 5,
+        GUNS: [
+            ...weaponMirror(gunGenerators.swarmerHatcher({ y: -4 }), 0.5)
         ],
     }
 
@@ -115,7 +125,7 @@ tier1: {
     }
 
     Class.pinion = {
-        PARENT: "genericTank",
+        PARENT: "genericTier1Tank",
         LABEL: "Pinion",
         DANGER: 4,
         GUNS: [
@@ -384,7 +394,7 @@ Class.tank.UPGRADES_TIER_0 = ["shooter", "commander", "blocker"]
         Class.crusher.UPGRADES_TIER_2 = ["pounder"]
             Class.pounder.UPGRADES_TIER_3 = ["mauler"]
                 Class.mauler.UPGRADES_TIER_4 = ["pulverizer"]
-    Class.commander.UPGRADES_TIER_1 = ["captain", "zerg"]
+    Class.commander.UPGRADES_TIER_1 = ["captain", "zerg", "whelmer"]
         Class.captain.UPGRADES_TIER_2 = ["major", "zalg"]
             Class.major.UPGRADES_TIER_3 = ["colonel", "zilthrone"]
                 Class.colonel.UPGRADES_TIER_4 = ["general"]

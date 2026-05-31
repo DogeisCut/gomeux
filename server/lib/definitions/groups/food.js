@@ -117,9 +117,7 @@ function generatePolygonFoodClassDefinition(polygonSideCount, polygonColor, shap
 Class.triangle = generatePolygonFoodClassDefinition(3, "gold")
 Class.square = generatePolygonFoodClassDefinition(4, "red")
 Class.pentagon = generatePolygonFoodClassDefinition(5, "blue")
-Class.pentagon.GIVE_KILL_MESSAGE = true
 Class.hexagon = generatePolygonFoodClassDefinition(6, "orange")
-Class.hexagon.GIVE_KILL_MESSAGE = true
 Class.heptagon = generatePolygonFoodClassDefinition(7, "green")
 Class.heptagon.GIVE_KILL_MESSAGE = true
 Class.octogon = generatePolygonFoodClassDefinition(8, "lavender")
@@ -153,12 +151,12 @@ exports.requestPolygon = function (sides) {
             return polygonColorMap[polygonSideCount]
         }
 
-        return 'black'
+        return '#000000'
     }
     const className = getPolygonLabelFromSideCount(sides).toLowerCase()
     
     Class[className] = generatePolygonFoodClassDefinition(sides, getPolygonColorFromSideCount(sides))
-    if (sides >= 5) Class[className].GIVE_KILL_MESSAGE = true
+    if (sides >= 7) Class[className].GIVE_KILL_MESSAGE = true
 
     const rarity = 0.5 ** (sides - (polygonSideBase + 2))
 
