@@ -1968,6 +1968,39 @@ import * as socketStuff from "./socketinit.js";
             drawChatMessages(x, false, py, instance, ratio, gui.visibleEntities ? 1 : alpha, instance.size, px, py);
             drawChatInput(x, y, instance, ratio, instance.size);
         }
+
+        function formatDamage(value) {  
+            for (let d = 0; d <= 3; d++) {  
+                let s = value.toFixed(d);  
+                if (Number(s) !== 0) return s;  
+            }  
+            return "0"
+        }
+
+        let now = Date.now();  
+        for (let i = global.hitNumbers.length - 1; i >= 0; i--) {  
+            let p = global.hitNumbers[i];  
+            let age = now - p.born;  
+            if (age > p.duration) {  
+                global.hitNumbers.splice(i, 1);  
+                continue;  
+            }  
+            let t = age / p.duration;
+            let alpha = 1 - t;
+            let hopY = -Math.sin(t * Math.PI) * 30 * ratio;  
+            let sx = ratio * p.x - px + global.screenWidth / 2;  
+            let sy = ratio * p.y - py + global.screenHeight / 2 + hopY;  
+            ctx[1].globalAlpha = alpha;  
+            drawText(  
+                formatDamage(p.value),  
+                sx, sy,  
+                24,  
+                gameDraw.getColor(p.color),  
+                "center", true, 1, true, ctx[1]  
+            );  
+        }  
+        ctx[1].globalAlpha = 1;
+
         if (global.advanced.blackout.active) {
             let entity = global.entities.find((u) => u.id === gui.playerid);
             if (entity) {

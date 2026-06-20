@@ -436,6 +436,7 @@ function Status() {
         }
     };
 }
+
 // Make a converter
 const process = (z = {}) => {
     let isNew = z.facing == null; // For whatever reason arguments.length is uglified poorly...
@@ -517,6 +518,32 @@ const process = (z = {}) => {
             // Update stuff
             if (z.health < hh) {
                 z.render.status.set('injured');
+
+                // TODO: handle dying entities
+                let damage = (hh - z.health) * (z.maxHealthN || 100);
+                let merge = false;
+                for (const hitNumber of global.hitNumbers) {
+                    if (hitNumber.id === z.index) {
+                        hitNumber.x = z.x
+                        hitNumber.y = z.y
+                        hitNumber.born = Date.now();
+                        hitNumber.value += damage;
+                        merge = true;
+                        break;
+                    }
+                }
+                if (!merge) {
+                    global.hitNumbers.push({  
+                        id: z.index,
+                        x: z.x + (Math.random() - 0.5) * z.size * 0.5,  
+                        y: z.y,  
+                        value: damage,  
+                        color: "#ff0000",  
+                        born: Date.now(),  
+                        duration: 1200,  
+                    }); 
+                }
+                
             } else if (z.render.status.getFade() !== 1) {
                 // If it turns out that we thought it was dead and it wasn't
                 z.render.status.set('normal');

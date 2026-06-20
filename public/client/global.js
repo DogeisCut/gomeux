@@ -314,6 +314,7 @@ const global = {
     mockupLoading: { then: cb => cb() },
     treeScale: 1,
     chats: {},
+    hitNumbers: [],
     initPlayer: () => {
         let list = {
             // Set up the player
@@ -406,6 +407,7 @@ const global = {
         global.gameHeight = 0;
         global.canvas.mouseMoved = false;
         global.mockups = [];
+        global.hitNumbers = [];
         global.mobile && document.exitFullscreen();
         clearInterval(global.socketMotionCycle);
         global.resetTarget();
@@ -435,6 +437,7 @@ const global = {
         global.metrics.lag = 0;
         global.secondaryLoop = false;
         global.mockups = [];
+        global.hitNumbers = [];
         global.canvas.mouseMoved = false;
         clearInterval(global.socketMotionCycle);
         global.resetTarget();
