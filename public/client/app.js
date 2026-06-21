@@ -1868,7 +1868,7 @@ import * as socketStuff from "./socketinit.js";
             }
         }
         global.advanced.roundMap && ctx[0].restore();
-        let gridsize = 30 * ratio;
+        let gridsize = 60 * ratio;
         if (config.graphical.showGrid && 2.5 < gridsize) { // Draw grid if the user wants to.
             ctx[0].save();
             ctx[0].lineWidth = config.graphical.borderChunk * ratio / 2;

@@ -99,7 +99,7 @@ class Entity extends EventEmitter {
         this.maxX = 0;
         this.maxY = 0;
         this.collidingBond = false;
-        this.lastDamageTime = 0;
+        this.lastDamageTime = 0; 
         // Optimized AABB calculation and update
         this.updateAABB = (active) => {
             if (!active || (!this.collidingBond && this.bond != null)) {
@@ -112,6 +112,7 @@ class Entity extends EventEmitter {
                 this.maxY = this.y + this.size;
             }
         };
+        this.statusEffects = new Map();
         entities.set(this.id, this);
         for (let v of global.gameManager.views) v.add(this);
         Events.emit('spawn', this);
@@ -659,6 +660,15 @@ class Entity extends EventEmitter {
         this.motionType = "motor";
         this.motionTypeArgs = {};
         this.move();
+    }
+
+    inflictStatus(effectId, duration, extraData = {}) {  
+        const existing = this.statusEffects.get(effectId);  
+        if (existing) {  
+            existing.timer = Math.max(existing.timer, duration);
+        } else {  
+            this.statusEffects.set(effectId, { timer: duration, duration, data: { ...extraData } });  
+        }  
     }
 
     get level() {

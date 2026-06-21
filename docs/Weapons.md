@@ -1,0 +1,16 @@
+Most of these can have other weapons attached on them to make projectile variants.
+- **Body Damage:** Every tank has this, rammers usually take this kind of damage while inflicting this kind of damage.
+- **Bullet:** A basic entity that moves in a straight line.
+- **Trap:** A high health stationary obstacle. Lasts longer than bullets. Fired at a static speed and slows down quickly.
+- **Block:** Similar to a trap, but will land at the mouse cursor when it was first fired and will continue to try and stay at that spot.
+- **Drone:** A medium health entity that follows the aim target of the owning entity when primary firing and can be repelled with secondary fire. Auto targets nearby entities when not firing, and otherwise drifts around the master. Usually lasts until killed. Can optionally ignore master commands.
+- **Swarm:** A variant of the drone that lasts for a limited time. Will also continue in the direction of movement in the even of no target. Cannot be repelled.
+- **Minion:** Drone variant with a bullet cannon (or other) that orbits around the target.
+- **Flame:** Deals less damage the longer it lives. Grows and fades out over time. Flies forward like a bullet but slows down slightly. Has infinite health and penetration. Lasts way shorter than bullets.
+- **Satellite:** Orbits around the entity that produced it. Speed, distance, and direction all can be configured. Primary fire moves satellites further away and optionally changes speed, and secondary fired brings them closer with an optional speed change.
+- **Shockwave:** A ring shaped trap-like entity that grows quickly and lasts a limited time. Produces a knockback effect to all enemy entities within its range.
+- **Boomerang:** A bullet variant that returns to the player halfway through its life.
+- **Laser:** Hitscan, stops at first enemy damaged. But can have a pierce number configured as well as treating the pierce as bounce instead.
+- **Spike:** Deals contact damage but not self damage.
+- **Aura:** an attachment that produces a field damaging to tanks or shapes.
+- **Auto-turret:** Automatically aims at other tanks. Can be configured to ignore master input. Doesn't just have to have a bullet cannon.
