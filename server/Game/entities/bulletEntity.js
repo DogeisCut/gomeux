@@ -462,12 +462,21 @@ class bulletEntity { // Basically an (Entity) but with heavy limitations to impr
             if (this.range < 0) this.kill();
         }
         if (this.settings.diesAtLowSpeed && !this.collisionArray.length && this.velocity.length < this.topSpeed / 2) this.health.amount -= this.health.getDamage(1 / global.gameManager.roomSpeed);
+        
+        let hBefore = this.health.amount
+        
         // Health damage
         if (this.damageReceived) {
             let healthDamage = this.health.getDamage(this.damageReceived);
             this.health.amount -= healthDamage;
         }
         this.damageReceived = 0;
+
+        let actualDamage = hBefore - this.health.amount;
+        if (actualDamage > 0) {
+            global.damageEvents.push({ x: this.x, y: this.y, damage: actualDamage, id: this.id, color: this.color.compiled });
+        }         
+
         // Check for death
         if (this.isDead()) {
             for (let gun of this.guns.values()) {

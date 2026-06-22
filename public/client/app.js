@@ -1991,11 +1991,12 @@ import * as socketStuff from "./socketinit.js";
             let sx = ratio * p.x - px + global.screenWidth / 2;  
             let sy = ratio * p.y - py + global.screenHeight / 2 + hopY;  
             ctx[1].globalAlpha = alpha;  
+            let entityColor = gameDraw.getColor(p.color.split(" ")[0])
             drawText(  
                 formatDamage(p.value),  
                 sx, sy,  
                 24,  
-                gameDraw.getColor(p.color),  
+                entityColor,  
                 "center", true, 1, true, ctx[1]  
             );  
         }  

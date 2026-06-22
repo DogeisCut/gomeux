@@ -517,33 +517,7 @@ const process = (z = {}) => {
             z.health = get.next() / 65535;
             // Update stuff
             if (z.health < hh) {
-                z.render.status.set('injured');
-
-                // TODO: handle dying entities
-                let damage = (hh - z.health) * (z.maxHealthN || 100);
-                let merge = false;
-                for (const hitNumber of global.hitNumbers) {
-                    if (hitNumber.id === z.index) {
-                        hitNumber.x = z.x
-                        hitNumber.y = z.y
-                        hitNumber.born = Date.now();
-                        hitNumber.value += damage;
-                        merge = true;
-                        break;
-                    }
-                }
-                if (!merge) {
-                    global.hitNumbers.push({  
-                        id: z.index,
-                        x: z.x + (Math.random() - 0.5) * z.size * 0.5,  
-                        y: z.y,  
-                        value: damage,  
-                        color: "#ff0000",  
-                        born: Date.now(),  
-                        duration: 1200,  
-                    }); 
-                }
-                
+                z.render.status.set('injured');                
             } else if (z.render.status.getFade() !== 1) {
                 // If it turns out that we thought it was dead and it wasn't
                 z.render.status.set('normal');
@@ -951,6 +925,7 @@ let incoming = async function(message, socket) {
         case 'RE': {
             global.mockups = [];
             global.entities = [];
+            global.hitNumbers = [];
         } break;
         case 'CC': {
             global.cached = {};
@@ -958,6 +933,37 @@ let incoming = async function(message, socket) {
         case 'M': {
             if (!m[1]) return;
             global.mockups[m[0]] = JSON.parse(m[1]);
+        } break;
+        case "HN": {  
+            let count = m[0];  
+            for (let i = 0; i < count; i++) {  
+                let base = 1 + i * 5;  
+                let x      = m[base];  
+                let y      = m[base + 1];  
+                let damage = m[base + 2];  
+                let id     = m[base + 3];  
+                let color  = m[base + 4];  
+
+
+                let existing = global.hitNumbers.find(  
+                    p => p.id === id
+                );  
+                if (existing) {  
+                    existing.value += damage;  
+                    existing.born = Date.now();
+                    existing.duration = 1200;
+                    existing.x = x;  
+                    existing.y = y;  
+                } else {  
+                    global.hitNumbers.push({  
+                        id, x, y,  
+                        value: damage,  
+                        color,
+                        born: Date.now(),  
+                        duration: 1200,  
+                    });  
+                }   
+            }  
         } break;
         case 'u': { // uplink
             // Pull the camera info

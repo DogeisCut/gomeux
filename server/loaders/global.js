@@ -20,6 +20,7 @@ global.defeatedTeams = [];
 global.servers = [];
 global.chats = {};
 global.travellingPlayers = [];
+global.damageEvents = [];
 global.fps = "Unknown";
 
 global.loadedAddons = [];

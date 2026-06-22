@@ -1586,6 +1586,17 @@ class socketManager {
                         }
                     }
                 }
+                
+                const visibleHits = global.damageEvents.filter(e =>  
+                    Math.abs(e.x - camX) < fovDiv + 200 &&  
+                    Math.abs(e.y - camY) < fovDivY + 200  
+                );  
+                if (visibleHits.length) {  
+                    socket.talk("HN", visibleHits.length,  
+                        ...visibleHits.flatMap(e => [e.x, e.y, e.damage, e.id, e.color])  
+                    );  
+                }  
+
                 if (updateCam) {
                     socket.talk(
                         "u",

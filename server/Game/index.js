@@ -210,6 +210,8 @@ class gameHandler {
         // Do entities life
         logs.entities.set();
         grid.clear();
+        global.damageEvents = [];
+
         for (const instance of entities.values()) {
             if (instance.contemplationOfMortality() === 1) {
                 if (Config.OUTBREAK && !instance.zombified && (instance.isPlayer || instance.isBot)) {
@@ -282,6 +284,7 @@ class gameHandler {
                 client.view.gazeUpon();
             }
         }
+        global.damageEvents = [];
     };
 
     foodloop() {
