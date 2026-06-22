@@ -1,3 +1,4 @@
+const { StatusEffects } = require('../../lib/definitions/statusEffects.js');
 let EventEmitter = require('events');
 global.entitiesIdLog = 0;
 const forceTwiggle = ["autospin", "turnWithSpeed", "spin", "fastspin", "veryfastspin", "withMotion", "smoothWithMotion", "looseWithMotion"];
@@ -47,6 +48,7 @@ class Entity extends EventEmitter {
         this.skill = new Skill();
         this.health = new HealthType(1, 'static', 0);
         this.guns = new Map();
+        this.statusEffects = new Map();
         this.gunsArrayed = [];
         this.turrets = new Map();
         this.props = new Map();
@@ -112,7 +114,6 @@ class Entity extends EventEmitter {
                 this.maxY = this.y + this.size;
             }
         };
-        this.statusEffects = new Map();
         entities.set(this.id, this);
         for (let v of global.gameManager.views) v.add(this);
         Events.emit('spawn', this);
@@ -479,6 +480,7 @@ class Entity extends EventEmitter {
             this.refreshBodyAttributes();
         }
         if (set.SPAWN_ON_DEATH) this.spawnOnDeath = set.SPAWN_ON_DEATH;
+        if (set.INFLICTS_STATUS != null) this.settings.inflictsStatus = set.INFLICTS_STATUS;
         if (set.RESET_EVENTS) {
             for (let { event, handler, once } of this.definitionEvents) this.removeListener(event, handler, once);
             this.definitionEvents = [];
@@ -608,6 +610,20 @@ class Entity extends EventEmitter {
         this.recoilMultiplier = this.RECOIL_MULTIPLIER * 1;
     }
 
+    inflictStatus(effectId, duration, extraData = {}) {  
+        const def = StatusEffects[effectId];  
+        if (!def) return;  
+        const existing = this.statusEffects.get(effectId);  
+        if (existing) {  
+            existing.timer = Math.max(existing.timer, duration);
+            return;
+        } 
+        const state = { timer: duration, duration, data: { ...extraData } }
+        this.statusEffects.set(effectId, state);
+        this.refreshBodyAttributes();  
+        if (def.onApply) def.onApply(this, state.data);  
+    }
+
     updateBodyInfo() { this.fov = 1 * this.FOV * 275 * Math.sqrt(this.size); }
 
     bindToMaster(position, bond, isInvulnerable) {
@@ -660,15 +676,6 @@ class Entity extends EventEmitter {
         this.motionType = "motor";
         this.motionTypeArgs = {};
         this.move();
-    }
-
-    inflictStatus(effectId, duration, extraData = {}) {  
-        const existing = this.statusEffects.get(effectId);  
-        if (existing) {  
-            existing.timer = Math.max(existing.timer, duration);
-        } else {  
-            this.statusEffects.set(effectId, { timer: duration, duration, data: { ...extraData } });  
-        }  
     }
 
     get level() {

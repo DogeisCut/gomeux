@@ -1,3 +1,4 @@
+const { StatusEffects } = require('../../lib/definitions/statusEffects.js');
 class bulletEntity { // Basically an (Entity) but with heavy limitations to improve performance.
     constructor(position, master) {
         if (!master) master = this;
@@ -309,6 +310,7 @@ class bulletEntity { // Basically an (Entity) but with heavy limitations to impr
             this.refreshBodyAttributes();
         }
         if (set.SPAWN_ON_DEATH) this.spawnOnDeath = set.SPAWN_ON_DEATH;
+        if (set.INFLICTS_STATUS != null) this.settings.inflictsStatus = set.INFLICTS_STATUS;
         if (set.TICK_HANDLER) this.tickHandler = set.TICK_HANDLER;
     }
 

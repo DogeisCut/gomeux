@@ -1,3 +1,5 @@
+const { StatusEffects } = require('../lib/definitions/statusEffects.js');
+
 class gameHandler {
     constructor() {
         this.loopCounter = 0;
@@ -271,6 +273,20 @@ class gameHandler {
             logs.activation.set();
             instance.activation.update();
             logs.activation.mark();
+
+            if (instance.statusEffects && instance.statusEffects.size) {  
+                const delta = global.gameManager.room.cycleSpeed / 1000;  
+                for (const [id, state] of instance.statusEffects) {  
+                    const def = StatusEffects[id];  
+                    if (def?.onTick) def.onTick(instance, delta, state.data);  
+                    state.timer -= delta;  
+                    if (state.timer <= 0) {  
+                        if (def?.onUnapply) def.onUnapply(instance, state.data);  
+                        instance.refreshBodyAttributes();  
+                        instance.statusEffects.delete(id);  
+                    }  
+                }  
+            }
 
             instance.emit('tick', { body: instance });
         }

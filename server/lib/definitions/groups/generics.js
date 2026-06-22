@@ -217,6 +217,7 @@ Class.bullet = {
     CAN_GO_OUTSIDE_ROOM: true,
     HITS_OWN_TYPE: "never",
     DIE_AT_RANGE: true,
+    INFLICTS_STATUS: [{ id: 'melting', duration: 5 }]
 };
 
 Class.drone = {

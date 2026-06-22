@@ -294,6 +294,10 @@ function advancedcollide(my, n, doDamage, doInelastic, nIsFirmCollide = false) {
             n.damageReceived += __n * Number(__n > 0
                 ? my.team != n.team
                 : my.healer && n.team == my.team && n.type == "tank" && my.master.id != n.id);
+            if (my.settings.inflictsStatus && __n > 0)  
+                for (const s of my.settings.inflictsStatus) n.inflictStatus(s.id, s.duration, s.data ?? {});  
+            if (n.settings.inflictsStatus && __my > 0)  
+                for (const s of n.settings.inflictsStatus) my.inflictStatus(s.id, s.duration, s.data ?? {});
         }
     }
     // Exit if healer (healers don't push on collide)

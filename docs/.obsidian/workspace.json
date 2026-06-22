@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tank Tree.md",
+                "file": "Status Effects.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Tank Tree"
+              "title": "Status Effects"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "fb0ab72372d45517",
   "lastOpenFiles": [
-    "Status Effects.md",
+    "Weapons.md",
     "Tank Tree.md",
-    "Weapons.md"
+    "Status Effects.md"
   ]
 }
